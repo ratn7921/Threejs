@@ -10,10 +10,14 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
-    "vite": "^5.3.1"
+    "vite": "^5.4.19"
   },
   "dependencies": {
+    "@timetreeapp/web-api": "^3.0.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "gsap": "^3.12.5",
+    "node-fetch": "^3.3.2",
     "three": "^0.165.0"
   }
 }

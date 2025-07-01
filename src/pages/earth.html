@@ -1,0 +1,227 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌍 Earth - Deep Dive</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --accent: #1faaff;
+      --bg-dark: #0b0c1e;
+      --bg-light: #1a1a1a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: var(--bg-dark);
+      color: #eee;
+      line-height: 1.6;
+    }
+    header {
+      background: url('/textures/8k_earth_daymap.jpg') center/cover no-repeat;
+      height: 40vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+    }
+    header h1 {
+      font-size: 3rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    h2 {
+      color: #ffe81f;
+      margin-bottom: 0.5rem;
+    }
+    .box {
+      background: var(--bg-light);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    }
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    .timeline-node {
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #444;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+    }
+    #timetree-info p {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    #timetree-info small {
+      color: #ccc;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌍 Earth: Deep Historical & Scientific Exploration</h1>
+  </header>
+
+  <main>
+    <section class="box">
+      <h2>🔬 Human–Chimpanzee Divergence</h2>
+      <div id="timetree-info">
+        <p>Loading divergence data…</p>
+      </div>
+    </section>
+
+    <section class="box">
+      <h2>🧬 Evolutionary Timeline of Homo sapiens</h2>
+      <p>This timeline is dynamically fetched from TimeTree API:</p>
+      <div id="timeline-container">
+        Loading timeline...
+      </div>
+    </section>
+
+    <section class="box">
+      <h2>📚 References</h2>
+      <ul>
+        <li><a href="https://timetree.org" target="_blank">TimeTree – Species Divergence & Timelines</a></li>
+        <li><a href="https://humanorigins.si.edu/" target="_blank">Smithsonian – Human Origins</a></li>
+        <li><a href="https://solarsystem.nasa.gov/planets/earth/overview/" target="_blank">NASA – Earth Overview</a></li>
+        <li><a href="https://www.nature.com/articles/d41586-019-00007-1" target="_blank">Nature – Early Earth Atmosphere</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <script type="module">
+    import { fetchDivergence } from '../api.js';
+
+    const infoBox = document.getElementById('timetree-info');
+    const timelineBox = document.getElementById('timeline-container');
+
+    async function loadTimeTree() {
+      try {
+        // Fetch pairwise divergence
+        const div = await fetchDivergence('Homo sapiens', 'Pan troglodytes');
+        infoBox.innerHTML = `
+          <p><strong>${div.age} million years ago</strong></p>
+          <small>95% CI: ${div.ci} Myr • Based on ${div.study_count} studies</small>
+        `;
+
+        // Fetch evolutionary timeline
+        const res = await fetch('/api/timeline?species=Homo sapiens');
+        if (res.ok) {
+          const timeline = await res.json();
+          timelineBox.innerHTML = timeline.map(item => `
+            <div class="timeline-node">
+              <strong>${item.taxon_name}</strong> diverged ~<em>${item.age} Ma</em> ago.
+            </div>
+          `).join('');
+        } else {
+          timelineBox.textContent = 'Failed to load timeline.';
+        }
+
+      } catch (err) {
+        console.error('TimeTree API error:', err);
+        infoBox.innerHTML = '<p>Failed to load divergence data.</p>';
+        timelineBox.textContent = 'Timeline unavailable.';
+      }
+    }
+
+    loadTimeTree();
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌍 Earth - Deep Dive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --accent: #1faaff; --bg-dark: #0b0c1e; --bg-light: #1a1a1a; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Orbitron',sans-serif; background:var(--bg-dark); color:#eee; }
+    header { background:url('/textures/8k_earth_daymap.jpg') center/cover no-repeat; height:40vh;
+             display:flex; align-items:center; justify-content:center; color:white;
+             text-shadow:0 0 8px rgba(0,0,0,0.7); }
+    header h1 { font-size:3rem; }
+    main { max-width:800px; margin:auto; padding:2rem; line-height:1.6; }
+    .box { background:var(--bg-light); padding:1.5rem; border-radius:8px;
+           box-shadow:0 0 12px rgba(0,0,0,0.5); margin-bottom:2rem; }
+    h2 { color:#ffe81f; margin-bottom:0.5rem; }
+    a { color:var(--accent); text-decoration:underline; }
+    .timeline-node { padding:.75rem 1rem; margin:.75rem 0; border-left:4px solid #444;
+                     background:rgba(255,255,255,0.05); border-radius:4px; }
+    #timetree-info p { font-size:1.25rem; margin-bottom:.5rem; }
+    #timetree-info small { color:#ccc; display:block; }
+  </style>
+</head>
+<body>
+  <header><h1>🌍 Earth: Deep Historical & Scientific Exploration</h1></header>
+  <main>
+    <section class="box">
+      <h2>🔬 Human–Chimpanzee Divergence</h2>
+      <div id="timetree-info"><p>Loading divergence…</p></div>
+    </section>
+
+    <section class="box">
+      <h2>🧬 Evolutionary Timeline of Homo sapiens</h2>
+      <p>This timeline is dynamically fetched:</p>
+      <div id="timeline-container">Loading timeline…</div>
+    </section>
+
+    <section class="box">
+      <h2>📚 References</h2>
+      <ul>
+        <li><a href="https://timetree.org" target="_blank">TimeTree</a></li>
+        <li><a href="https://humanorigins.si.edu/" target="_blank">Smithsonian Human Origins</a></li>
+        <li><a href="https://solarsystem.nasa.gov/planets/earth/overview/" target="_blank">NASA Earth Overview</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <script type="module">
+    import { fetchDivergence } from '../api.js';
+    const infoBox = document.getElementById('timetree-info');
+    const timelineBox = document.getElementById('timeline-container');
+
+    async function loadData() {
+      try {
+        const div = await fetchDivergence('Homo sapiens', 'Pan troglodytes');
+        infoBox.innerHTML = `<p><strong>${div.age} Ma</strong></p>
+                             <small>95% CI: ${div.ci} Myr • ${div.study_count} studies</small>`;
+
+        const res = await fetch('/api/timeline?species=Homo sapiens');
+        if (res.ok) {
+          const tl = await res.json();
+          timelineBox.innerHTML = tl.map(item => `
+            <div class="timeline-node">
+              <strong>${item.taxon_name}</strong> diverged ~<em>${item.age} Ma</em> ago.
+            </div>
+          `).join('');
+        } else {
+          timelineBox.textContent = 'Timeline unavailable.';
+        }
+      } catch {
+        infoBox.innerHTML = '<p>Error loading data.</p>';
+        timelineBox.textContent = 'Timeline unavailable.';
+      }
+    }
+    loadData();
+  </script>
+</body>
+</html>

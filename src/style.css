@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+/* :root {
+  font-family: 'Orbitron', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: black;
+  color: #ffffff;
+  --accent: #ffe81f;
+  --bg-dark: #0a0a0a;
+  --glass: rgba(255, 255, 255, 0.05);
+} */
+/* 
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+  color: #eee;
+  line-height: 1.6;
+  padding: 2rem;
+}
+h1, h2, h3 {
+  color: #ffe81f;
+} */
+
+/* canvas.webgl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 1;
+} */
+
+/* Toggle Day/Night Button */
+/* #toggleMode {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  font-size: 16px;
+  z-index: 10;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: var(--glass);
+  color: var(--accent);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+#toggleMode:hover {
+  background: rgba(255, 255, 255, 0.1);
+} */
+
+/* Planet Info Panel */
+/* .planet-info {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  background: var(--glass);
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 300px;
+  z-index: 10;
+  color: #eee;
+  font-size: 14px;
+  line-height: 1.4;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.planet-info h2 {
+  color: var(--accent);
+  margin-top: 0;
+  font-size: 20px;
+} */
+
+/* Footer Planet Selector */
+/* .footer-nav {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+} */
+/* 
+.planet-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background-color: transparent;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+.planet-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--accent);
+} */
+
+
+
+/* 
+body {
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+  font-family: 'Orbitron', sans-serif;
+}
+button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 0.75rem 1.25rem;
+  font-weight: bold;
+  background: #111;
+  border: 2px solid #ffe81f;
+  color: #ffe81f;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.planet-info {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  max-width: 300px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  color: #eee;
+}
+.footer-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+}
+.planet-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  border: 2px solid #eee;
+  cursor: pointer;
+} */
+
+
+:root {
+  --accent: #ffe81f;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Orbitron', sans-serif;
+  background: black;
+  color: white;
+}
+
+canvas.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Toggle button */
+#toggleMode {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: var(--accent);
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Planet info panel */
+.planet-info {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  background: rgba(0,0,0,0.6);
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 280px;
+  z-index: 10;
+}
+
+/* Footer nav */
+.footer-nav {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+/* Planet buttons */
+.planet-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.planet-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* Planet textures */
+.planet-btn[data-planet="earth"]   { background-image: url('/textures/8k_earth_daymap.jpg'); }
+.planet-btn[data-planet="mars"]    { background-image: url('/textures/8k_mars.jpg'); }
+.planet-btn[data-planet="venus"]   { background-image: url('/textures/8k_venus_surface.jpg'); }
+.planet-btn[data-planet="jupiter"] { background-image: url('/textures/8k_jupiter.jpg'); }
+.planet-btn[data-planet="saturn"]  { background-image: url('/textures/8k_saturn.jpg'); }
+.planet-btn[data-planet="mercury"] { background-image: url('/textures/8k_mercury.jpg'); }
