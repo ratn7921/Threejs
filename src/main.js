@@ -35,27 +35,27 @@ const planetInfo = {
   mars: {
     title: "🪐 Mars",
     snippet: "4.603 billion years old • Dry valleys, icy poles, and potential for past microbial life.",
-    deepLink: "#"
+    deepLink: "/src/pages/mars.html"
   },
   venus: {
     title: "🔥 Venus",
     snippet: "4.503 billion years old • Dense CO₂ atmosphere • Surface hotter than Mercury due to greenhouse effect.",
-    deepLink: "#"
+    deepLink: "/src/pages/venus.html"
   },
   jupiter: {
     title: "☄ Jupiter",
     snippet: "Gas giant • Over 300x Earth's mass • Massive storms and over 90 moons.",
-    deepLink: "#"
+    deepLink: "/src/pages/jupiter.html"
   },
   saturn: {
     title: "💫 Saturn",
     snippet: "Famous for its rings • Mostly hydrogen and helium • Winds over 1,800 km/h.",
-    deepLink: "#"
+    deepLink: "/src/pages/saturn.html"
   },
   mercury: {
     title: "🧊 Mercury",
     snippet: "Closest to the Sun • No atmosphere to retain heat • Huge day-night temperature swings.",
-    deepLink: "#"
+    deepLink: "/src/pages/mercury.html"
   }
 };
 

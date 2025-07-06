@@ -1,50 +1,716 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💫 Saturn - Deep Dive</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"/>
-  <style>
-    :root { --accent: #e9c46a; --bg-dark: #1e1a14; --bg-light: #3a352d; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:'Orbitron',sans-serif; background:var(--bg-dark); color:#eee; }
-    header { background:url('/textures/8k_saturn.jpg') center/cover no-repeat; height:40vh;
-             display:flex; align-items:center; justify-content:center; color:white;
-             text-shadow:0 0 8px rgba(0,0,0,0.7); }
-    header h1 { font-size:3rem; }
-    main { max-width:800px; margin:auto; padding:2rem; line-height:1.6; }
-    .box { background:var(--bg-light); padding:1.5rem; border-radius:8px;
-           box-shadow:0 0 12px rgba(0,0,0,0.5); margin-bottom:2rem; }
-    h2 { color:var(--accent); margin-bottom:0.5rem; }
-    a { color:var(--accent); text-decoration:underline; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturn - The Ringed Planet | NASA Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .saturn-visual {
+            width: 200px;
+            height: 120px;
+            margin: 1rem auto;
+            position: relative;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .planet {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #fad5a5, #ffb347);
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            box-shadow: 0 0 30px rgba(255, 179, 71, 0.5);
+        }
+
+        .ring {
+            width: 200px;
+            height: 40px;
+            border: 3px solid #ddd;
+            border-radius: 50%;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            opacity: 0.7;
+        }
+
+        .ring:nth-child(2) {
+            width: 180px;
+            left: 10px;
+            border-color: #ccc;
+        }
+
+        .ring:nth-child(3) {
+            width: 160px;
+            left: 20px;
+            border-color: #bbb;
+        }
+
+        main {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-tab.active {
+            background: #007bff;
+            color: white;
+            border-bottom: 3px solid #0056b3;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+        }
+
+        .nav-tab.active:hover {
+            background: #0056b3;
+        }
+
+        .content-section {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .subsection {
+            margin-bottom: 2rem;
+        }
+
+        .subsection h3 {
+            font-size: 1.8rem;
+            color: #34495e;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3498db;
+            padding-left: 1rem;
+        }
+
+        .fact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .fact-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .fact-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-table th,
+        .stats-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .stats-table th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        .stats-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .mission-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1rem 0 1rem 3rem;
+            border-left: 3px solid #3498db;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 1rem;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+
+        .timeline-year {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .moon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .moon-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #e74c3c;
+        }
+
+        .moon-card h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .fact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header><h1>💫 Saturn: Lord of the Rings</h1></header>
-  <main>
-    <section class="box">
-      <h2>Ring System</h2>
-      <p>Stunning rings of ice and rock extending tens of thousands of km. Likely remnants of a destroyed moon.</p>
-    </section>
+    <header>
+        <div class="container">
+            <h1 class="hero-title">SATURN</h1>
+            <p class="hero-subtitle">The Ringed Jewel of Our Solar System</p>
+            <div class="saturn-visual">
+                <div class="planet"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+            </div>
+        </div>
+    </header>
 
-    <section class="box">
-      <h2>Atmosphere & Moons</h2>
-      <p>Hydrogen & helium atmosphere. Titan (nitrogen‑rich) and Enceladus (cryovolcanism) among 80+ moons.</p>
-    </section>
+    <main class="container">
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview')">Overview</button>
+            <button class="nav-tab" onclick="showSection('structure')">Structure</button>
+            <button class="nav-tab" onclick="showSection('rings')">Rings</button>
+            <button class="nav-tab" onclick="showSection('moons')">Moons</button>
+            <button class="nav-tab" onclick="showSection('exploration')">Exploration</button>
+            <button class="nav-tab" onclick="showSection('facts')">Quick Facts</button>
+        </nav>
 
-    <section class="box">
-      <h2>Exploration</h2>
-      <p>Cassini‑Huygens provided unprecedented data (2004–2017), discovering water plumes and complex organic chemistry.</p>
-    </section>
+        <div id="overview" class="content-section active">
+            <h2 class="section-title">Overview</h2>
+            
+            <div class="subsection">
+                <h3>Introduction</h3>
+                <p>Saturn, the sixth planet from the Sun, is the second-largest planet in our solar system and arguably the most spectacular. Known for its magnificent ring system, Saturn has captivated astronomers and space enthusiasts for centuries. This gas giant is a world of extremes, with winds reaching speeds of up to 1,800 kilometers per hour and a density so low that it would float in water.</p>
+            </div>
 
-    <section class="box">
-      <h2>References</h2>
-      <ul>
-        <li><a href="https://solarsystem.nasa.gov/planets/saturn/overview/" target="_blank">NASA Saturn Overview</a></li>
-        <li><a href="https://en.wikipedia.org/wiki/Saturn" target="_blank">Wikipedia: Saturn</a></li>
-      </ul>
-    </section>
-  </main>
+            <div class="highlight-box">
+                <h3>🌟 Did You Know?</h3>
+                <p>Saturn is the least dense planet in our solar system! With a density of only 0.687 g/cm³, it's less dense than water. If you could find a bathtub big enough, Saturn would float!</p>
+            </div>
+
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h4>🌍 Size Comparison</h4>
+                    <p>Saturn is about 9 times wider than Earth. If Earth were the size of a nickel, Saturn would be about as big as a volleyball.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>⏰ Day Length</h4>
+                    <p>A day on Saturn lasts about 10.7 Earth hours, making it the second-shortest day in the solar system after Jupiter.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>🗓️ Year Length</h4>
+                    <p>Saturn takes about 29.5 Earth years to complete one orbit around the Sun, making its seasons last about 7 Earth years each.</p>
+                </div>
+                <div class="fact-card">
+                    <h4>🌡️ Temperature</h4>
+                    <p>The average temperature on Saturn is about -178°C (-288°F), cold enough to freeze nitrogen solid.</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Formation and History</h3>
+                <p>Saturn formed about 4.5 billion years ago along with the rest of our solar system. It's believed to have formed from the gravitational collapse of material in the early solar nebula. The planet's core likely formed first, followed by the accretion of gas and ice that created its massive atmosphere and ring system.</p>
+            </div>
+        </div>
+
+        <div id="structure" class="content-section">
+            <h2 class="section-title">Structure & Composition</h2>
+            
+            <div class="subsection">
+                <h3>Atmospheric Composition</h3>
+                <p>Saturn's atmosphere is primarily composed of hydrogen (about 96%) and helium (about 3%), with trace amounts of methane, ammonia, hydrogen deuteride, and ethane. The planet's beautiful golden hue comes from ammonia crystals in its upper atmosphere.</p>
+            </div>
+
+            <div class="image-placeholder">
+                Saturn's Layered Structure Diagram
+            </div>
+
+            <div class="subsection">
+                <h3>Internal Structure</h3>
+                <p>Saturn's interior is believed to consist of several layers:</p>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li><strong>Core:</strong> A dense core of rock, ice, and metals, about 15-20 times the mass of Earth</li>
+                    <li><strong>Metallic Hydrogen Layer:</strong> Surrounding the core, where hydrogen becomes metallic under extreme pressure</li>
+                    <li><strong>Molecular Hydrogen Layer:</strong> The bulk of the planet, consisting of liquid hydrogen and helium</li>
+                    <li><strong>Atmosphere:</strong> The outermost layer we can observe, with complex weather patterns</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Magnetic Field</h3>
+                <p>Saturn has a magnetic field about 578 times stronger than Earth's. Interestingly, Saturn's magnetic field is nearly perfectly aligned with its rotation axis, making it unique among the gas giants. This magnetic field creates spectacular auroras at Saturn's poles.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>Weather and Storms</h3>
+                <p>Saturn experiences extreme weather, including:</p>
+                <div class="fact-grid">
+                    <div class="fact-card">
+                        <h4>🌪️ Great White Spot</h4>
+                        <p>Massive storms that appear roughly every 30 years, lasting for months and spanning thousands of kilometers.</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4>🌊 Jet Streams</h4>
+                        <p>Powerful winds that can reach speeds of up to 1,800 km/h (1,100 mph) near the equator.</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4>⚡ Lightning</h4>
+                        <p>Electrical storms that are 10,000 times more powerful than those on Earth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rings" class="content-section">
+            <h2 class="section-title">The Magnificent Ring System</h2>
+            
+            <div class="subsection">
+                <h3>Ring Discovery</h3>
+                <p>Saturn's rings were first observed by Galileo Galilei in 1610, though he didn't recognize them as rings. It wasn't until 1659 that Christiaan Huygens correctly identified them as "a thin, flat ring, nowhere touching, and inclined to the ecliptic."</p>
+            </div>
+
+            <div class="image-placeholder">
+                Detailed View of Saturn's Ring System
+            </div>
+
+            <div class="subsection">
+                <h3>Ring Composition</h3>
+                <p>Saturn's rings are primarily composed of water ice particles ranging in size from tiny grains to large boulders. The rings also contain rocky debris and dust. The ice particles are incredibly reflective, which is why Saturn's rings appear so bright.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>Major Ring Divisions</h3>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Ring Name</th>
+                            <th>Distance from Saturn</th>
+                            <th>Width</th>
+                            <th>Characteristics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>D Ring</td>
+                            <td>67,000 - 74,500 km</td>
+                            <td>7,500 km</td>
+                            <td>Innermost ring, very faint</td>
+                        </tr>
+                        <tr>
+                            <td>C Ring</td>
+                            <td>74,500 - 92,000 km</td>
+                            <td>17,500 km</td>
+                            <td>Crepe Ring, semi-transparent</td>
+                        </tr>
+                        <tr>
+                            <td>B Ring</td>
+                            <td>92,000 - 117,500 km</td>
+                            <td>25,500 km</td>
+                            <td>Brightest and most massive ring</td>
+                        </tr>
+                        <tr>
+                            <td>Cassini Division</td>
+                            <td>117,500 - 122,200 km</td>
+                            <td>4,700 km</td>
+                            <td>Large gap between B and A rings</td>
+                        </tr>
+                        <tr>
+                            <td>A Ring</td>
+                            <td>122,200 - 136,800 km</td>
+                            <td>14,600 km</td>
+                            <td>Contains Encke Gap</td>
+                        </tr>
+                        <tr>
+                            <td>F Ring</td>
+                            <td>140,180 km</td>
+                            <td>30-500 km</td>
+                            <td>Narrow, braided ring</td>
+                        </tr>
+                        <tr>
+                            <td>E Ring</td>
+                            <td>180,000 - 480,000 km</td>
+                            <td>300,000 km</td>
+                            <td>Widest ring, very diffuse</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <h3>🔬 Ring Mysteries</h3>
+                <p>Despite decades of study, Saturn's rings continue to puzzle scientists. Recent discoveries include "spokes" in the rings, braided ring structures, and evidence that the rings may be much younger than previously thought - possibly only 100-200 million years old!</p>
+            </div>
+        </div>
+
+        <div id="moons" class="content-section">
+            <h2 class="section-title">Saturn's Moons</h2>
+            
+            <div class="subsection">
+                <h3>A Diverse Family</h3>
+                <p>Saturn has 146 confirmed moons, making it the planet with the most moons in our solar system. These moons range from tiny moonlets embedded in the rings to massive worlds larger than the planet Mercury. Seven of Saturn's moons are large enough to be rounded by their own gravity.</p>
+            </div>
+
+            <div class="moon-grid">
+                <div class="moon-card">
+                    <h4>🌙 Titan</h4>
+                    <p><strong>Diameter:</strong> 5,149 km<br>
+                    <strong>Special Features:</strong> Thick atmosphere, liquid methane lakes, potential for life. Larger than Mercury and has a substantial atmosphere composed mainly of nitrogen.</p>
+                </div>
+                <div class="moon-card">
+                    <h4>🧊 Enceladus</h4>
+                    <p><strong>Diameter:</strong> 504 km<br>
+                    <strong>Special Features:</strong> Ice geysers, subsurface ocean, smooth icy surface. Active geology with water vapor plumes erupting from its south pole.</p>
+                </div>
+                <div class="moon-card">
+                    <h4>🌕 Mimas</h4>
+                    <p><strong>Diameter:</strong> 396 km<br>
+                    <strong>Special Features:</strong> Giant impact crater (Herschel), "Death Star" appearance. The crater is about 1/3 the diameter of the moon itself.</p>
+                </div>
+                <div class="moon-card">
+                    <h4>🌗 Iapetus</h4>
+                    <p><strong>Diameter:</strong> 1,469 km<br>
+                    <strong>Special Features:</strong> Two-tone coloration, equatorial ridge. One hemisphere is much darker than the other, creating a distinctive appearance.</p>
+                </div>
+                <div class="moon-card">
+                    <h4>🌘 Rhea</h4>
+                    <p><strong>Diameter:</strong> 1,527 km<br>
+                    <strong>Special Features:</strong> Icy surface, possible ring system. Saturn's second-largest moon with a low density suggesting it's mostly ice.</p>
+                </div>
+                <div class="moon-card">
+                    <h4>🌙 Dione</h4>
+                    <p><strong>Diameter:</strong> 1,123 km<br>
+                    <strong>Special Features:</strong> Bright ice cliffs, possible subsurface ocean. Features dramatic cliff faces and evidence of past geological activity.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>🔬 Astrobiology Potential</h3>
+                <p>Both Titan and Enceladus are considered prime targets in the search for extraterrestrial life. Titan's thick atmosphere and hydrocarbon lakes create a unique environment, while Enceladus's subsurface ocean and hydrothermal activity provide conditions that could support life as we know it.</p>
+            </div>
+        </div>
+
+        <div id="exploration" class="content-section">
+            <h2 class="section-title">Exploration History</h2>
+            
+            <div class="mission-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1979</div>
+                    <h4>Pioneer 11</h4>
+                    <p>First spacecraft to visit Saturn, providing the first close-up images of the planet and its rings. Discovered the F ring and two new moons.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">1980-1981</div>
+                    <h4>Voyager 1 & 2</h4>
+                    <p>Voyager 1 flew by Saturn in November 1980, followed by Voyager 2 in August 1981. These missions revolutionized our understanding of Saturn's ring system and moons, discovering new moons and ring structures.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2004-2017</div>
+                    <h4>Cassini-Huygens Mission</h4>
+                    <p>The most comprehensive study of Saturn to date. Cassini orbited Saturn for 13 years, while the Huygens probe landed on Titan in 2005. The mission made groundbreaking discoveries about Saturn's rings, moons, and atmosphere.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2027</div>
+                    <h4>Dragonfly Mission (Planned)</h4>
+                    <p>NASA's upcoming mission will send a rotorcraft to explore Titan's surface and atmosphere, searching for signs of life and studying the moon's complex chemistry.</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Key Discoveries</h3>
+                <div class="fact-grid">
+                    <div class="fact-card">
+                        <h4>🌊 Subsurface Oceans</h4>
+                        <p>Confirmed the existence of liquid water oceans beneath the icy surfaces of Enceladus and possibly other moons.</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4>🌀 Hexagonal Storm</h4>
+                        <p>Discovered a massive hexagonal storm at Saturn's north pole, a unique atmospheric phenomenon in the solar system.</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4>💎 Diamond Rain</h4>
+                        <p>Evidence suggests that diamonds may form in Saturn's atmosphere and fall as rain due to extreme pressure and temperature conditions.</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4>🌙 Ring Shepherd Moons</h4>
+                        <p>Small moons that orbit within or near the rings, helping to maintain ring structure through gravitational interactions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="facts" class="content-section">
+            <h2 class="section-title">Quick Facts</h2>
+            
+            <table class="stats-table">
+                <tbody>
+                    <tr>
+                        <td><strong>Distance from Sun</strong></td>
+                        <td>1.4 billion km (9.5 AU)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Diameter</strong></td>
+                        <td>116,460 km (9.1 × Earth)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mass</strong></td>
+                        <td>5.68 × 10²⁶ kg (95.2 × Earth)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gravity</strong></td>
+                        <td>10.44 m/s² (1.065 × Earth)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day Length</strong></td>
+                        <td>10.7 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Year Length</strong></td>
+                        <td>29.5 Earth years</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average Temperature</strong></td>
+                        <td>-178°C (-288°F)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Atmosphere</strong></td>
+                        <td>96% hydrogen, 3% helium, 1% other</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Number of Moons</strong></td>
+                        <td>146 confirmed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ring System</strong></td>
+                        <td>Prominent rings extending 282,000 km from planet</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Magnetic Field</strong></td>
+                        <td>578 times stronger than Earth's</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Escape Velocity</strong></td>
+                        <td>35.5 km/s</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <h3>🚀 Future Exploration</h3>
+                <p>Scientists are planning several future missions to Saturn and its moons, including potential landers for Enceladus to search for life in its subsurface ocean, and advanced atmospheric probes to study Saturn's deep atmosphere and internal structure.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Saturn Information Center - Educational Resource</p>
+            <p>Data compiled from NASA, ESA, and various space agencies</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Add some interactivity to the Saturn visual
+        document.addEventListener('DOMContentLoaded', function() {
+            const saturnVisual = document.querySelector('.saturn-visual');
+            saturnVisual.addEventListener('click', function() {
+                this.style.animationDuration = '2s';
+                setTimeout(() => {
+                    this.style.animationDuration = '20s';
+                }, 4000);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,50 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔥 Venus - Deep Dive</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"/>
-  <style>
-    :root { --accent: #f5c542; --bg-dark: #2e1a0a; --bg-light: #49311f; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:'Orbitron',sans-serif; background:var(--bg-dark); color:#eee; }
-    header { background:url('/textures/8k_venus_surface.jpg') center/cover no-repeat; height:40vh;
-             display:flex; align-items:center; justify-content:center; color:white;
-             text-shadow:0 0 8px rgba(0,0,0,0.7); }
-    header h1 { font-size:3rem; }
-    main { max-width:800px; margin:auto; padding:2rem; line-height:1.6; }
-    .box { background:var(--bg-light); padding:1.5rem; border-radius:8px;
-           box-shadow:0 0 12px rgba(0,0,0,0.5); margin-bottom:2rem; }
-    h2 { color:var(--accent); margin-bottom:0.5rem; }
-    a { color:var(--accent); text-decoration:underline; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venus - Earth's Twin Planet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: twinkle 20s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin: 30px 0;
+            padding: 10px;
+        }
+
+        .nav-tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            margin: 0 5px;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+        }
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .fact-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        }
+
+        .fact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255,107,53,0.2);
+        }
+
+        .fact-card h3 {
+            color: #ff6b35;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .fact-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f7931e;
+            margin-bottom: 10px;
+        }
+
+        .planet-visual {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #ff6b35, #8b4513);
+            border-radius: 50%;
+            margin: 40px auto;
+            position: relative;
+            animation: rotate 20s linear infinite;
+            box-shadow: 0 0 50px rgba(255,107,53,0.5);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .planet-visual::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            width: 60px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            filter: blur(5px);
+        }
+
+        .atmosphere-layers {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .layer {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .layer:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(10px);
+        }
+
+        .layer-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .missions-timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #ff6b35, #f7931e);
+            transform: translateX(-50%);
+        }
+
+        .mission-item {
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .mission-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .mission-content {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 0 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .mission-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,107,53,0.3);
+        }
+
+        .mission-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+        }
+
+        .comparison-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .planet-comparison {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .planet-comparison:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255,107,53,0.2);
+        }
+
+        .planet-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .venus-icon {
+            background: radial-gradient(circle at 30% 30%, #ffd700, #ff6b35);
+        }
+
+        .earth-icon {
+            background: radial-gradient(circle at 30% 30%, #4fc3f7, #2e7d32);
+        }
+
+        .interactive-model {
+            text-align: center;
+            margin: 40px 0;
+            padding: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+
+        .model-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .control-btn {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background: rgba(0,0,0,0.3);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            opacity: 0.7;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                margin: 5px;
+                padding: 10px 20px;
+            }
+            
+            .fact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .planet-visual {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header><h1>🔥 Venus: Earth's Twin</h1></header>
-  <main>
-    <section class="box">
-      <h2>Origin & Atmosphere</h2>
-      <p>Formed ~4.5 billion years ago. Dense CO₂ atmosphere with sulfuric‑acid clouds; surface pressure ~92 × Earth’s.</p>
-    </section>
+    <div class="header">
+        <div class="container">
+            <h1>♀ VENUS</h1>
+            <p>Earth's Twin Sister - The Hottest Planet in Our Solar System</p>
+        </div>
+    </div>
 
-    <section class="box">
-      <h2>Surface Conditions</h2>
-      <p>Average surface temperature ~467 °C, volcanic plains, deformed mountains, retrograde rotation.</p>
-    </section>
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview')">Overview</button>
+            <button class="nav-tab" onclick="showSection('structure')">Structure</button>
+            <button class="nav-tab" onclick="showSection('atmosphere')">Atmosphere</button>
+            <button class="nav-tab" onclick="showSection('exploration')">Exploration</button>
+            <button class="nav-tab" onclick="showSection('comparison')">Comparison</button>
+        </div>
 
-    <section class="box">
-      <h2>Exploration</h2>
-      <p>Surveyed by Soviet Venera, NASA Magellan, ESA Venus Express—ongoing interest for future missions.</p>
-    </section>
+        <div id="overview" class="content-section active">
+            <div class="planet-visual"></div>
+            
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h3>Surface Temperature</h3>
+                    <div class="value">462°C</div>
+                    <p>Hot enough to melt lead! Venus is the hottest planet in our solar system due to its extreme greenhouse effect.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Day Length</h3>
+                    <div class="value">243 Earth Days</div>
+                    <p>A day on Venus is longer than its year! It rotates very slowly and backwards compared to most planets.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Distance from Sun</h3>
+                    <div class="value">108 Million km</div>
+                    <p>Venus is the second planet from the Sun, about 25% closer than Earth.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Atmospheric Pressure</h3>
+                    <div class="value">90x Earth's</div>
+                    <p>The pressure on Venus is equivalent to being 1km underwater on Earth.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Mass</h3>
+                    <div class="value">81.5% of Earth</div>
+                    <p>Venus is nearly identical in size and mass to Earth, earning it the nickname "Earth's twin."</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Orbital Period</h3>
+                    <div class="value">225 Earth Days</div>
+                    <p>Venus completes one orbit around the Sun faster than one rotation on its axis.</p>
+                </div>
+            </div>
 
-    <section class="box">
-      <h2>References</h2>
-      <ul>
-        <li><a href="https://solarsystem.nasa.gov/planets/venus/overview/" target="_blank">NASA Venus Overview</a></li>
-        <li><a href="https://en.wikipedia.org/wiki/Venus" target="_blank">Wikipedia: Venus</a></li>
-      </ul>
-    </section>
-  </main>
+            <div class="interactive-model">
+                <h2>Venus Facts</h2>
+                <p>Venus is named after the Roman goddess of love and beauty. It's the brightest natural object in the night sky after the Moon, making it visible even during daylight hours. The planet's surface is hidden beneath thick clouds of sulfuric acid, creating a perpetual greenhouse effect that makes it the hottest planet in our solar system.</p>
+                
+                <div class="model-controls">
+                    <button class="control-btn" onclick="rotateModel()">Rotate View</button>
+                    <button class="control-btn" onclick="showClouds()">Show Clouds</button>
+                    <button class="control-btn" onclick="showSurface()">Show Surface</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="structure" class="content-section">
+            <h2>Internal Structure</h2>
+            
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h3>Core</h3>
+                    <div class="value">Iron & Nickel</div>
+                    <p>Venus has a metallic core approximately 3,200 km in diameter, similar to Earth's but likely completely molten.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Mantle</h3>
+                    <div class="value">Rocky Silicate</div>
+                    <p>The mantle is about 3,000 km thick and composed of hot rock that may still be geologically active.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Crust</h3>
+                    <div class="value">50 km thick</div>
+                    <p>Venus has a thick basaltic crust with evidence of extensive volcanic activity and tectonic processes.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Magnetic Field</h3>
+                    <div class="value">Very Weak</div>
+                    <p>Venus has no significant magnetic field, possibly due to its slow rotation and lack of a magnetic dynamo.</p>
+                </div>
+            </div>
+
+            <div class="atmosphere-layers">
+                <h3>Surface Features</h3>
+                <div class="layer">
+                    <div class="layer-color" style="background: #ff6b35;"></div>
+                    <div>
+                        <h4>Volcanic Plains</h4>
+                        <p>Over 80% of Venus's surface consists of smooth volcanic plains with evidence of extensive lava flows.</p>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <div class="layer-color" style="background: #8b4513;"></div>
+                    <div>
+                        <h4>Highland Regions</h4>
+                        <p>Two major highland regions: Ishtar Terra and Aphrodite Terra, comparable to Earth's continents.</p>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <div class="layer-color" style="background: #ffd700;"></div>
+                    <div>
+                        <h4>Impact Craters</h4>
+                        <p>Relatively few impact craters due to the thick atmosphere and recent volcanic resurfacing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="atmosphere" class="content-section">
+            <h2>Atmospheric Composition</h2>
+            
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h3>Carbon Dioxide</h3>
+                    <div class="value">96.5%</div>
+                    <p>The primary component creating the extreme greenhouse effect that superheats the planet.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Nitrogen</h3>
+                    <div class="value">3.5%</div>
+                    <p>The second most abundant gas, similar to Earth's atmosphere but in much smaller proportion.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Sulfuric Acid Clouds</h3>
+                    <div class="value">Dense Layer</div>
+                    <p>Thick clouds of concentrated sulfuric acid completely obscure the surface from visible light.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Wind Speed</h3>
+                    <div class="value">Up to 360 km/h</div>
+                    <p>Hurricane-force winds in the upper atmosphere, despite very slow surface winds.</p>
+                </div>
+            </div>
+
+            <div class="atmosphere-layers">
+                <h3>Atmospheric Layers</h3>
+                <div class="layer">
+                    <div class="layer-color" style="background: #ffeb3b;"></div>
+                    <div>
+                        <h4>Upper Atmosphere (60-80 km)</h4>
+                        <p>Sulfuric acid clouds with temperatures around -40°C and extreme winds.</p>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <div class="layer-color" style="background: #ff9800;"></div>
+                    <div>
+                        <h4>Middle Atmosphere (20-60 km)</h4>
+                        <p>Dense CO₂ atmosphere with increasing temperature and pressure with depth.</p>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <div class="layer-color" style="background: #f44336;"></div>
+                    <div>
+                        <h4>Lower Atmosphere (0-20 km)</h4>
+                        <p>Extremely hot and dense near the surface, with crushing atmospheric pressure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="exploration" class="content-section">
+            <h2>Space Exploration Missions</h2>
+            
+            <div class="missions-timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">1962</div>
+                    <div class="mission-content">
+                        <h3>Mariner 2 (USA)</h3>
+                        <p>First successful planetary flyby mission, confirmed Venus's extreme surface temperatures and lack of magnetic field.</p>
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">1970</div>
+                    <div class="mission-content">
+                        <h3>Venera 7 (USSR)</h3>
+                        <p>First successful landing on Venus, transmitted data for 23 minutes before succumbing to the harsh conditions.</p>
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">1975</div>
+                    <div class="mission-content">
+                        <h3>Venera 9 & 10 (USSR)</h3>
+                        <p>First images from Venus's surface, revealing a rocky, volcanic landscape with good visibility.</p>
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">1989</div>
+                    <div class="mission-content">
+                        <h3>Magellan (USA)</h3>
+                        <p>Radar mapping mission that revealed Venus's detailed surface features and geological history.</p>
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">2006</div>
+                    <div class="mission-content">
+                        <h3>Venus Express (ESA)</h3>
+                        <p>Studied Venus's atmosphere and climate, operating until 2014 and providing detailed atmospheric data.</p>
+                    </div>
+                </div>
+                
+                <div class="mission-item">
+                    <div class="mission-year">2010</div>
+                    <div class="mission-content">
+                        <h3>Akatsuki (Japan)</h3>
+                        <p>Currently studying Venus's atmosphere and meteorology, focusing on cloud dynamics and atmospheric circulation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="comparison" class="content-section">
+            <h2>Venus vs Earth Comparison</h2>
+            
+            <div class="comparison-chart">
+                <div class="planet-comparison">
+                    <div class="planet-icon venus-icon"></div>
+                    <h3>Venus</h3>
+                    <p><strong>Diameter:</strong> 12,104 km</p>
+                    <p><strong>Mass:</strong> 4.87 × 10²⁴ kg</p>
+                    <p><strong>Gravity:</strong> 8.87 m/s²</p>
+                    <p><strong>Day:</strong> 243 Earth days</p>
+                    <p><strong>Year:</strong> 225 Earth days</p>
+                </div>
+                
+                <div class="planet-comparison">
+                    <div class="planet-icon earth-icon"></div>
+                    <h3>Earth</h3>
+                    <p><strong>Diameter:</strong> 12,756 km</p>
+                    <p><strong>Mass:</strong> 5.97 × 10²⁴ kg</p>
+                    <p><strong>Gravity:</strong> 9.81 m/s²</p>
+                    <p><strong>Day:</strong> 24 hours</p>
+                    <p><strong>Year:</strong> 365.25 days</p>
+                </div>
+            </div>
+
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <h3>Size Similarity</h3>
+                    <div class="value">95% of Earth</div>
+                    <p>Venus is often called Earth's twin due to their similar size and mass.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Atmospheric Difference</h3>
+                    <div class="value">Extreme</div>
+                    <p>While Earth has a life-supporting atmosphere, Venus has a toxic, crushing atmosphere.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Surface Conditions</h3>
+                    <div class="value">Opposite</div>
+                    <p>Earth supports life with liquid water, while Venus is a hellish desert world.</p>
+                </div>
+                
+                <div class="fact-card">
+                    <h3>Rotation</h3>
+                    <div class="value">Backwards</div>
+                    <p>Venus rotates backwards (retrograde) compared to Earth and most planets.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>Explore the mysteries of Venus - Our Solar System's most enigmatic planet</p>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function rotateModel() {
+            const planet = document.querySelector('.planet-visual');
+            planet.style.animation = 'rotate 2s linear infinite';
+            setTimeout(() => {
+                planet.style.animation = 'rotate 20s linear infinite';
+            }, 2000);
+        }
+
+        function showClouds() {
+            const planet = document.querySelector('.planet-visual');
+            planet.style.background = 'radial-gradient(circle at 30% 30%, #ffeb3b, #ff9800, #f44336)';
+            setTimeout(() => {
+                planet.style.background = 'radial-gradient(circle at 30% 30%, #ffd700, #ff6b35, #8b4513)';
+            }, 3000);
+        }
+
+        function showSurface() {
+            const planet = document.querySelector('.planet-visual');
+            planet.style.background = 'radial-gradient(circle at 30% 30%, #8b4513, #ff6b35, #654321)';
+            setTimeout(() => {
+                planet.style.background = 'radial-gradient(circle at 30% 30%, #ffd700, #ff6b35, #8b4513)';
+            }, 3000);
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.fact-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease-in-out';
+                    }
+                });
+            });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
